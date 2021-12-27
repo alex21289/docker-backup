@@ -1,11 +1,8 @@
-FROM       golang:1.9
-MAINTAINER Johannes 'fish' Ziemke <github@5pi.de> (@discordianfish)
+FROM       golang:1.15
 
-RUN go get -u github.com/golang/dep/cmd/dep
-
-WORKDIR	/go/src/github.com/discordianfish/docker-backup
-COPY Gopkg.* *.go ./
-RUN	dep ensure --vendor-only
+WORKDIR	/go/src/github.com/alex21289/docker-backup
+COPY go.* ./
+RUN	go mod tidy
 COPY . .
 RUN go install
 
