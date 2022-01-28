@@ -1,11 +1,11 @@
-FROM       golang:1.15
+FROM golang:1.17
 
-WORKDIR	/go/src/github.com/alex21289/docker-backup
+WORKDIR	/docker-backup
 COPY go.* ./
 RUN	go mod tidy
 COPY . .
-RUN go install
+RUN CGO_ENABLED=0 go build -o bin/docker-backup .
 
 FROM	busybox
-COPY	--from=0 /go/bin/docker-backup /bin/
+COPY	--from=0 /docker-backup/bin /bin/
 ENTRYPOINT [ "/bin/docker-backup" ]
