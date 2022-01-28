@@ -1,2 +1,5 @@
 docker-backup
 vendor/
+*.tar.gz
+*.tar
+.vscode/
